@@ -3,6 +3,8 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+using TMPro;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -17,18 +19,31 @@ using UnityEditor;
 
 public class MenuUIHandler : MonoBehaviour
 {
-   // public ColorPicker ColorPicker;
-
-   
     
-    private void Start()
-    {
-      //  ColorPicker.Init();
-        //this will call the NewColorSelected function when the color picker have a color button clicked.
-      //  ColorPicker.onColorChanged += NewColorSelected;
+    private string playerName;
+    public TMP_InputField InputName;
+    public Text bestScore;
+    private int score;
 
-      //  ColorPicker.SelectColor(MainManager.Instance.TeamColor);
+
+    void Start()
+    {
+        playerName = Persistent.Instance.textName;
+        score = Persistent.Instance.bestScore;
+        bestScore.text = "Best Score: "+ playerName + ": " + score;
     }
+
+
+    public void SetName()
+    {
+
+        playerName = InputName.text;
+        Persistent.Instance.textName = playerName;
+        Persistent.Instance.score = 0;
+        
+    }
+
+
 
     public void StartNew()
     {
@@ -37,7 +52,7 @@ public class MenuUIHandler : MonoBehaviour
 
     public void Exit()
     {
-       // MainManager.Instance.SaveColor();
+        Persistent.Instance.SaveScore();
 
 #if UNITY_EDITOR
         EditorApplication.ExitPlaymode();
@@ -45,23 +60,4 @@ public class MenuUIHandler : MonoBehaviour
         Application.Quit(); // original code to quit Unity player
 #endif
     }
-
-    public void NewColorSelected(Color color)
-    {
-        // add code here to handle when a color is selected
-      //  MainManager.Instance.TeamColor = color;
-    }
-
-    /*
-    public void SaveColorClicked()
-    {
-      //  MainManager.Instance.SaveColor();
-    }
-
-    public void LoadColorClicked()
-    {
-      //  MainManager.Instance.LoadColor();
-      //  ColorPicker.SelectColor(MainManager.Instance.TeamColor);
-    }
-    */
 }
