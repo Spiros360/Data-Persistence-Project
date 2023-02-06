@@ -12,7 +12,8 @@ public class Persistent : MonoBehaviour
     public int bestScore;
     public int score;
     public string textName;
-    
+    public string textNewName;
+
 
 
     // Start() and Update() methods deleted - we don't need them right now
@@ -39,6 +40,7 @@ public class Persistent : MonoBehaviour
         public int bestScore;
         public int score;
         public string textName;
+        public string textNewName;
     }
 
     public void SaveScore()
@@ -46,7 +48,7 @@ public class Persistent : MonoBehaviour
 
         if (score > bestScore)
         {
-
+            textName = textNewName;
             bestScore = score;
             SaveData data = new SaveData();
        

@@ -38,7 +38,7 @@ public class MenuUIHandler : MonoBehaviour
     {
 
         playerName = InputName.text;
-        Persistent.Instance.textName = playerName;
+        Persistent.Instance.textNewName = playerName;
         Persistent.Instance.score = 0;
         
     }

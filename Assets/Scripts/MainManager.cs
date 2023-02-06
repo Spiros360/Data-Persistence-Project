@@ -17,7 +17,7 @@ public class MainManager : MonoBehaviour
     
     private bool m_Started = false;
     private int m_Points;
-    private int Points;
+    private int totalPoints;
 
     
     private bool m_GameOver = false;
@@ -29,9 +29,9 @@ public class MainManager : MonoBehaviour
     void Start()
     {
 
-        Points = Persistent.Instance.bestScore;
+        totalPoints = Persistent.Instance.bestScore;
         textMainName = Persistent.Instance.textName;
-        BestScoreText.text = "Best Score: " + textMainName + ": " + Points;
+        BestScoreText.text = "Best Score: " + textMainName + ": " + totalPoints;
         
 
         const float step = 0.6f;
@@ -87,8 +87,10 @@ public class MainManager : MonoBehaviour
     {
         m_GameOver = true;
         GameOverText.SetActive(true);
-        BestScoreText.text = "Best Score: " + textMainName + ": " + m_Points;
         Persistent.Instance.score = m_Points;
         Persistent.Instance.SaveScore();
+        textMainName = Persistent.Instance.textName;
+        totalPoints = Persistent.Instance.bestScore;
+        BestScoreText.text = "Best Score: " + textMainName + ": " + totalPoints;
     }
 }
